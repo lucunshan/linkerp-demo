@@ -55,8 +55,8 @@ public class OpenApiServiceImpl implements OpenApiService {
         return categoryWithReportTableVos;
     }
 
-    public String CreateReportTableInfoHeader(TableInfoHeaderVo header, String accessToken) {
-        String tableInfoId = "";
+    public TableInfoIdParam createReportTableInfoHeader(TableInfoHeaderVo header, String accessToken) {
+        TableInfoIdParam tableInfoIdParam = null;
         try {
             String jsonParam = encryptDataService.encryptData(JSON.toJSONString(header));
             EncryptDataVo vo = new EncryptDataVo();
@@ -67,8 +67,7 @@ public class OpenApiServiceImpl implements OpenApiService {
 
             Result result = JSONObject.parseObject(body, Result.class);
             if (result != null && result.isSuccess()) {
-                TableInfoIdParam tableInfoIdParam = encryptDataService.decryptData(result.getData(), TableInfoIdParam.class);
-                tableInfoId = tableInfoIdParam.getTableInfoId();
+                tableInfoIdParam = encryptDataService.decryptData(result.getData(), TableInfoIdParam.class);
             }
             else {
                 // 根据错误码处理
@@ -77,10 +76,10 @@ public class OpenApiServiceImpl implements OpenApiService {
             ex.printStackTrace();
         }
 
-        return tableInfoId;
+        return tableInfoIdParam;
     }
 
-    public boolean SaveReportTableInfoData(TableInfoDataVo tableData, String accessToken) {
+    public boolean saveReportTableInfoData(TableInfoDataVo tableData, String accessToken) {
         boolean success = false;
         try {
             String jsonParam = encryptDataService.encryptData(JSON.toJSONString(tableData));
@@ -103,7 +102,7 @@ public class OpenApiServiceImpl implements OpenApiService {
         return success;
     }
 
-    public DataSaveStatus GetReportTableInfoDataSaveStatus(BatchVo batchVo, String accessToken) {
+    public DataSaveStatus getReportTableInfoDataSaveStatus(BatchVo batchVo, String accessToken) {
         DataSaveStatus status = new DataSaveStatus();
         try {
             String jsonParam = encryptDataService.encryptData(JSON.toJSONString(batchVo));
