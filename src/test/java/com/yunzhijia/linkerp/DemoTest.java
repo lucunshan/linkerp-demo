@@ -111,7 +111,7 @@ public class DemoTest {
         tableData.setEid("6824227");
         tableData.setReportCategoryId("59ae4c29b65a185fddf3decc"); // 来源于AdminTableInfos,与表头保持一致
         tableData.setTableInfoId("59e0847eb65a1861731a1bc8");// 来源于表头创建或已有数据表Id
-        tableData.setAddType(0);
+        tableData.setAddType(1);
         tableData.setData(testData);
         tableData.setBatchId("GmdGyrsuqqPqZcZRLpwzxXvjbDXu88");// 批次id,每次传不重复随机值，建议使用uuid
 
